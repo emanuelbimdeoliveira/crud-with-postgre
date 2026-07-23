@@ -1,0 +1,21 @@
+import express from "express";
+import router from "./routes/routesTasks.js";
+import pool from "./database/database.js";
+import createTables from "./database/createTables.js";
+
+const app = express();
+app.use(express.json());
+
+await createTables();
+
+app.use(router);
+
+app.get("/", (req, res) => {
+  res.json({
+    status: "Servidor funcionando!",
+  });
+});
+
+app.listen(3000, () => {
+  console.log("Servidor rodando na porta 3000");
+});
